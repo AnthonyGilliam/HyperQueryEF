@@ -49,7 +49,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Car.cs" />
+    <Compile Include="Customer.cs" />
+    <Compile Include="Dealership.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="HyperQueryEFContext.cs" />
+    <Compile Include="Make.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Motorcycle.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sale.cs" />
+    <Compile Include="SalesPerson.cs" />
+    <Compile Include="Vehicle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
