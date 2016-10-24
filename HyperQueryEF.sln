@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HyperQueryEF.Core", "Projects\HyperQueryEF.Core\HyperQueryEF.Core.csproj", "{D231810B-C221-4644-BB13-366B837B56CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HyperQueryEF.Tests", "Projects\HyperQueryEF.Tests\HyperQueryEF.Tests.csproj", "{7CBDD97B-5410-4724-8E3F-B1B606306164}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HyperQueryEF.Model", "Projects\HyperQueryEF.Model\HyperQueryEF.Model.csproj", "{0A730900-CE9E-4CA0-89A2-9EB70A998A01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{D231810B-C221-4644-BB13-366B837B56CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D231810B-C221-4644-BB13-366B837B56CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D231810B-C221-4644-BB13-366B837B56CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CBDD97B-5410-4724-8E3F-B1B606306164}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CBDD97B-5410-4724-8E3F-B1B606306164}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CBDD97B-5410-4724-8E3F-B1B606306164}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CBDD97B-5410-4724-8E3F-B1B606306164}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A730900-CE9E-4CA0-89A2-9EB70A998A01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A730900-CE9E-4CA0-89A2-9EB70A998A01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A730900-CE9E-4CA0-89A2-9EB70A998A01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A730900-CE9E-4CA0-89A2-9EB70A998A01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
