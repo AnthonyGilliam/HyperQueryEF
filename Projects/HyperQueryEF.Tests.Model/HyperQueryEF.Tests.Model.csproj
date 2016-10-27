@@ -7,8 +7,8 @@
     <ProjectGuid>{0A730900-CE9E-4CA0-89A2-9EB70A998A01}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HyperQueryEF.Model</RootNamespace>
-    <AssemblyName>HyperQueryEF.Model</AssemblyName>
+    <RootNamespace>HyperQueryEF.Tests.Model</RootNamespace>
+    <AssemblyName>HyperQueryEF.Tests.Model</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -53,9 +53,15 @@
     <Compile Include="Customer.cs" />
     <Compile Include="Dealership.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="EntityConfigurations\CarConfiguration.cs" />
+    <Compile Include="EntityConfigurations\CustomerConfiguration.cs" />
+    <Compile Include="EntityConfigurations\DealershipConfiguration.cs" />
+    <Compile Include="EntityConfigurations\MotorcycleConfiguration.cs" />
+    <Compile Include="EntityConfigurations\SaleConfiguration.cs" />
+    <Compile Include="EntityConfigurations\SalesPersonConfiguration.cs" />
+    <Compile Include="EntityConfigurations\VehicleConfiguration.cs" />
     <Compile Include="HyperQueryEFContext.cs" />
     <Compile Include="Make.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Motorcycle.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,6 +72,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

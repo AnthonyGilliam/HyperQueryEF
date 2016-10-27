@@ -1,4 +1,4 @@
-﻿namespace HyperQueryEF.Model
+﻿namespace HyperQueryEF.Tests.Model
 {
     public enum Make
     {

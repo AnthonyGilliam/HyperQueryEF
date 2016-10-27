@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HyperQueryEF.Model
+namespace HyperQueryEF.Tests.Model
 {
     public abstract class Entity
     {
+        protected Entity()
+        {
+            DateCreated = DateTime.Now;    
+        }
+
         public int ID { get; set; }
         public DateTime DateCreated { get; set; }
     }
