@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace HyperQueryEF.Core
 {
@@ -10,7 +11,7 @@ namespace HyperQueryEF.Core
         T Get<T>(params object[] ids) where T : class;
         T Get<T>(Func<T, bool> expression) where T : class;
         IQueryable<T> GetAll<T>() where T : class;
-        IQueryable<T> GetAll<T>(Func<T, bool> expression) where T : class;
+        IQueryable<T> GetAll<T>(Expression<Func<T, bool>> expression) where T : class;
         int GetCount<T>() where T : class;
         T GetRandom<T>() where T : class;
         T GetRandom<T>(Func<T, bool> expression) where T : class;

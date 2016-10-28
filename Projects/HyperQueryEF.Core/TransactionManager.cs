@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 
 namespace HyperQueryEF.Core
@@ -90,7 +91,7 @@ namespace HyperQueryEF.Core
             }
         }
 
-        public IQueryable<T> GetAll<T>(Func<T, bool> expression) where T : class
+        public IQueryable<T> GetAll<T>(Expression<Func<T, bool>> expression) where T : class
         {
             using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
             {

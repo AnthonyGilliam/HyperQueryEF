@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace HyperQueryEF.Core
 {
@@ -34,9 +35,9 @@ namespace HyperQueryEF.Core
             return _dbContext.Set<T>().AsQueryable<T>();
         }
 
-        public IQueryable<T> GetAll<T>(Func<T, bool> expression) where T : class
+        public IQueryable<T> GetAll<T>(Expression<Func<T, bool>> expression) where T : class
         {
-            return GetAll<T>().Where(expression).AsQueryable();
+            return GetAll<T>().Where(expression);
         }
 
         public int GetCount<T>() where T : class
