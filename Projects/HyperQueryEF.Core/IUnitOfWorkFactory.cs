@@ -12,7 +12,7 @@ namespace HyperQueryEF.Core
         /// Returns a PersistenceManager from the services registered in the WindsorInstaller class having the given context and dependency injection lifestyle.
         /// </summary>
         /// <typeparam name="TContext">Entity Framework database context to make persistenceManager generic to.</typeparam>
-        /// <param name="lifestyle">Shelf-life of dependency injected object</param>
+        /// <param name="lifestyle">Life-span of dependency injected object</param>
         /// <returns></returns>
         IPersistenceManager CreatePersistenceManager<TContext>(LifestyleType lifestyle) where TContext : DbContext;
 

@@ -58,19 +58,43 @@ namespace HyperQueryEF.Core
             }
         }
 
-        public IEnumerable<T> GetAll<T>() where T : class
+        public int GetCount<T>() where T : class
         {
             using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
             {
-                return unitOfWork.GetAll<T>().ToArray();
+                return unitOfWork.GetCount<T>();
             }
         }
 
-        public IEnumerable<T> GetAll<T>(Func<T, bool> expression) where T : class
+        public T GetRandom<T>() where T : class
         {
             using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
             {
-                return unitOfWork.GetAll(expression).ToArray();
+                return unitOfWork.GetRandom<T>();
+            }
+        }
+
+        public T GetRandom<T>(Func<T, bool> expression) where T : class
+        {
+            using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
+            {
+                return unitOfWork.GetRandom(expression);
+            }
+        }
+
+        public IQueryable<T> GetAll<T>() where T : class
+        {
+            using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
+            {
+                return unitOfWork.GetAll<T>();
+            }
+        }
+
+        public IQueryable<T> GetAll<T>(Func<T, bool> expression) where T : class
+        {
+            using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
+            {
+                return unitOfWork.GetAll(expression);
             }
         }
 
@@ -129,8 +153,17 @@ namespace HyperQueryEF.Core
             }
         }
 
+        public void Delete<T>(T entity) where T : class
+        {
+            using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
+            {
+                unitOfWork.Delete(entity);
+                unitOfWork.SaveChanges();
+            }
+        }
+
         /// <summary>
-        /// Use reflection to force IUnitOfWork.Attach() method to be generic to whatever type of object passed into it.
+        /// Use reflection to force Attach() method to be generic to whatever type of object passed into it.
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="unitOfWork"></param>

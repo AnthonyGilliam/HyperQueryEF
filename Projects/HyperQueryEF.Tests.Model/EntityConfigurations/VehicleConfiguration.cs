@@ -9,6 +9,7 @@ namespace HyperQueryEF.Tests.Model.EntityConfigurations
         {
             ToTable("Vehicles");
             Property(vehicle => vehicle.ID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Property(vehicle => vehicle.Model).IsRequired();
         }
     }
 }
