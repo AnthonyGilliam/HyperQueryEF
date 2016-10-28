@@ -16,6 +16,12 @@ namespace HyperQueryEF.Tests.Model
         }
 
         public virtual DbSet<Dealership> Dealerships { get; set; }
+        public virtual DbSet<Vehicle> Vehicles { get; set; }
+        public virtual DbSet<Car> Cars { get; set; }
+        public virtual DbSet<Motorcycle> Motorcycles { get; set; }
+        public virtual DbSet<SalesPerson> SalesPeople { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Sale> Sales { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
