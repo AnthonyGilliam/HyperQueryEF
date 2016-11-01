@@ -12,9 +12,9 @@ namespace HyperQueryEF.Core
         private readonly IUnitOfWorkFactory _unitOfWorkFactory;
         private readonly List<KeyValuePair<int, object>> _contextObjects;
 
-        public TransactionManager(IUnitOfWorkFactory unitOfWorkFactory)
+        public TransactionManager()
         {
-            _unitOfWorkFactory = unitOfWorkFactory;
+            _unitOfWorkFactory = new UnitOfWorkFactory();
             _contextObjects = new List<KeyValuePair<int, object>>();
         }
 
@@ -45,7 +45,7 @@ namespace HyperQueryEF.Core
 
         public T Get<T>(params object[] ids) where T : class
         {
-            using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
+            using (var unitOfWork = _unitOfWorkFactory.Create<TContext>(UnitOfWorkType.Persistent))
             {
                 return unitOfWork.Get<T>(ids);
             }
@@ -53,7 +53,7 @@ namespace HyperQueryEF.Core
 
         public T Get<T>(Func<T, bool> expression) where T : class
         {
-            using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
+            using (var unitOfWork = _unitOfWorkFactory.Create<TContext>(UnitOfWorkType.Persistent))
             {
                 return unitOfWork.Get(expression);
             }
@@ -61,7 +61,7 @@ namespace HyperQueryEF.Core
 
         public int GetCount<T>() where T : class
         {
-            using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
+            using (var unitOfWork = _unitOfWorkFactory.Create<TContext>(UnitOfWorkType.Persistent))
             {
                 return unitOfWork.GetCount<T>();
             }
@@ -69,7 +69,7 @@ namespace HyperQueryEF.Core
 
         public T GetRandom<T>() where T : class
         {
-            using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
+            using (var unitOfWork = _unitOfWorkFactory.Create<TContext>(UnitOfWorkType.Persistent))
             {
                 return unitOfWork.GetRandom<T>();
             }
@@ -77,7 +77,7 @@ namespace HyperQueryEF.Core
 
         public T GetRandom<T>(Func<T, bool> expression) where T : class
         {
-            using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
+            using (var unitOfWork = _unitOfWorkFactory.Create<TContext>(UnitOfWorkType.Persistent))
             {
                 return unitOfWork.GetRandom(expression);
             }
@@ -85,7 +85,7 @@ namespace HyperQueryEF.Core
 
         public IQueryable<T> GetAll<T>() where T : class
         {
-            using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
+            using (var unitOfWork = _unitOfWorkFactory.Create<TContext>(UnitOfWorkType.Persistent))
             {
                 return unitOfWork.GetAll<T>();
             }
@@ -93,7 +93,7 @@ namespace HyperQueryEF.Core
 
         public IQueryable<T> GetAll<T>(Expression<Func<T, bool>> expression) where T : class
         {
-            using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
+            using (var unitOfWork = _unitOfWorkFactory.Create<TContext>(UnitOfWorkType.Persistent))
             {
                 return unitOfWork.GetAll(expression);
             }
@@ -101,7 +101,7 @@ namespace HyperQueryEF.Core
 
         public void Save<T>(T entity) where T : class
         {
-            using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
+            using (var unitOfWork = _unitOfWorkFactory.Create<TContext>(UnitOfWorkType.Persistent))
             {
                 foreach (var obj in ObjectsAttachedToCurrentContext)
                 {
@@ -120,7 +120,7 @@ namespace HyperQueryEF.Core
 
         public void Save<T>(IEnumerable<T> entities) where T : class
         {
-            using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
+            using (var unitOfWork = _unitOfWorkFactory.Create<TContext>(UnitOfWorkType.Persistent))
             {
                 foreach (var obj in ObjectsAttachedToCurrentContext)
                 {
@@ -138,7 +138,7 @@ namespace HyperQueryEF.Core
 
         public void Update<T>(T entity) where T : class
         {
-            using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
+            using (var unitOfWork = _unitOfWorkFactory.Create<TContext>(UnitOfWorkType.Persistent))
             {
                 unitOfWork.Update(entity);
                 unitOfWork.SaveChanges();
@@ -147,7 +147,7 @@ namespace HyperQueryEF.Core
 
         public void Update<T>(IEnumerable<T> entities) where T : class
         {
-            using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
+            using (var unitOfWork = _unitOfWorkFactory.Create<TContext>(UnitOfWorkType.Persistent))
             {
                 unitOfWork.Update(entities);
                 unitOfWork.SaveChanges();
@@ -156,11 +156,30 @@ namespace HyperQueryEF.Core
 
         public void Delete<T>(T entity) where T : class
         {
-            using (var unitOfWork = _unitOfWorkFactory.CreatePersistenceManager<TContext>(LifestyleType.Transient))
+            using (var unitOfWork = _unitOfWorkFactory.Create<TContext>(UnitOfWorkType.Persistent))
             {
                 unitOfWork.Delete(entity);
                 unitOfWork.SaveChanges();
             }
+        }
+
+        public bool HasChanges()
+        {
+            return ObjectsAttachedToCurrentContext.Any();
+        }
+
+        public void SaveChanges()
+        {
+            using (var unitOfWork = _unitOfWorkFactory.Create<TContext>(UnitOfWorkType.Persistent))
+            {
+                unitOfWork.Save(ObjectsAttachedToCurrentContext);
+                unitOfWork.SaveChanges();
+            }
+        }
+
+        public void Dispose()
+        {
+            _contextObjects.Clear();
         }
 
         /// <summary>

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace HyperQueryEF.Core
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         void Attach<T>(T entity) where T : class;
         T Get<T>(params object[] ids) where T : class;
@@ -20,5 +20,7 @@ namespace HyperQueryEF.Core
         void Update<T>(T entity) where T : class;
         void Update<T>(IEnumerable<T> entities) where T : class;
         void Delete<T>(T entity) where T : class;
+        bool HasChanges();
+        void SaveChanges();
     }
 }

@@ -4,22 +4,16 @@ using System.Data.Entity;
 namespace HyperQueryEF.Core
 {
     /// <summary>
-    /// Uses Castle Windsor's Typed Factory Facility and Typed Factory Component Selector features to select the registered IPersistenceManager service installed using Windsor. 
+    /// Factory to produce a unit of work as either a PersistenceManager or Transaction manager based on constructor parameter
     /// </summary>
-    public interface IUnitOfWorkFactory : IDisposable
+    public interface IUnitOfWorkFactory
     {
         /// <summary>
-        /// Returns a PersistenceManager from the services registered in the WindsorInstaller class having the given context and dependency injection lifestyle.
+        /// Returns a unit of work of constructor defined type
         /// </summary>
-        /// <typeparam name="TContext">Entity Framework database context to make persistenceManager generic to.</typeparam>
-        /// <param name="lifestyle">Life-span of dependency injected object</param>
+        /// <typeparam name="TContext">Database context to make unit of work generic to.</typeparam>
+        /// <param name="unitOfWorkType">Transient or persistent unit of work</param>
         /// <returns></returns>
-        IPersistenceManager CreatePersistenceManager<TContext>(LifestyleType lifestyle) where TContext : DbContext;
-
-        /// <summary>
-        /// Mark the given UnitOfWork for garbage collection.
-        /// </summary>
-        /// <param name="unitOfWork"></param>
-        void Release(IUnitOfWork unitOfWork);
+        IUnitOfWork Create<TContext>(UnitOfWorkType unitOfWorkType) where TContext : DbContext;
     }
 }

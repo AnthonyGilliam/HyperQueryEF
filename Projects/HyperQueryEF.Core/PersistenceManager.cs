@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace HyperQueryEF.Core
 {
-    public class PersistenceManager<TContext> : IPersistenceManager where TContext : DbContext
+    public class PersistenceManager<TContext> : IUnitOfWork where TContext : DbContext
     {
         private readonly TContext _dbContext;
 
