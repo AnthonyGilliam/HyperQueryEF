@@ -13,8 +13,8 @@ namespace HyperQueryEF.Core
         IQueryable<T> GetAll<T>() where T : class;
         IQueryable<T> GetAll<T>(Expression<Func<T, bool>> expression) where T : class;
         int GetCount<T>() where T : class;
-        T GetRandom<T>() where T : class;
-        T GetRandom<T>(Func<T, bool> expression) where T : class;
+        T GetRandom<T, O>(Func<T, O> orderByExpression) where T : class;
+        T GetRandom<T, O>(Func<T, bool> expression, Func<T, O> orderByExpression) where T : class;
         void Save<T>(T entity) where T : class;
         void Save<T>(IEnumerable<T> entities) where T : class;
         void Update<T>(T entity) where T : class;

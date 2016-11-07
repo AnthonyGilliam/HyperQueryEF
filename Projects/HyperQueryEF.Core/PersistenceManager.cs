@@ -45,7 +45,7 @@ namespace HyperQueryEF.Core
             return _dbContext.Set<T>().Count();
         }
 
-        public T GetRandom<T>() where T : class
+        public T GetRandom<T, O>(Func<T, O> sortExpression) where T : class
         {
             var rowcount = GetCount<T>();
 
@@ -55,11 +55,12 @@ namespace HyperQueryEF.Core
             var randomIndex = new Random().Next(rowcount);
 
             return _dbContext.Set<T>()
+                .OrderBy(sortExpression)
                 .Skip(randomIndex)
                 .FirstOrDefault();
         }
 
-        public T GetRandom<T>(Func<T, bool> expression) where T : class
+        public T GetRandom<T, O>(Func<T, bool> expression, Func<T, O> sortExpression) where T : class
         {
             var rowcount = _dbContext.Set<T>().Count(expression);
 
@@ -69,6 +70,8 @@ namespace HyperQueryEF.Core
             var randomIndex = new Random().Next(rowcount);
 
             return _dbContext.Set<T>()
+                .Where(expression)
+                .OrderBy(sortExpression)
                 .Skip(randomIndex)
                 .FirstOrDefault();
         }

@@ -67,19 +67,19 @@ namespace HyperQueryEF.Core
             }
         }
 
-        public T GetRandom<T>() where T : class
+        public T GetRandom<T, O>(Func<T, O> orderByExpression) where T : class
         {
             using (var unitOfWork = _unitOfWorkFactory.Create<TContext>(UnitOfWorkType.Persistent))
             {
-                return unitOfWork.GetRandom<T>();
+                return unitOfWork.GetRandom(orderByExpression);
             }
         }
 
-        public T GetRandom<T>(Func<T, bool> expression) where T : class
+        public T GetRandom<T, O>(Func<T, bool> expression, Func<T, O> orderByExpression) where T : class
         {
             using (var unitOfWork = _unitOfWorkFactory.Create<TContext>(UnitOfWorkType.Persistent))
             {
-                return unitOfWork.GetRandom(expression);
+                return unitOfWork.GetRandom(expression, orderByExpression);
             }
         }
 
